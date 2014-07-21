@@ -2212,6 +2212,20 @@ namespace {
         return "$substr";
     }
 
+    /* ----------------------- ExpressionLength ---------------------------- */
+
+    Value ExpressionLength::evaluateInternal(Variables* vars) const {
+        Value pString(vpOperand[0]->evaluateInternal(vars));
+
+        string str = pString.coerceToString();
+        return Value((int)str.length());
+    }
+
+    REGISTER_EXPRESSION("$length", ExpressionLength::parse);
+    const char *ExpressionLength::getOpName() const {
+        return "$length";
+    }
+
     /* ----------------------- ExpressionSubtract ---------------------------- */
 
     Value ExpressionSubtract::evaluateInternal(Variables* vars) const {
